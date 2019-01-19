@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using I8Beef.Neato.BeeHive.Models;
-using I8Beef.Neato.BeeHive.Models.Auth;
+using I8Beef.Neato.BeeHive.Protocol;
+using I8Beef.Neato.BeeHive.Protocol.Auth;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 

@@ -1,6 +1,5 @@
-﻿using I8Beef.Neato.Nucelo.Services.GeneralInfo;
-using I8Beef.Neato.Nucelo.Services.HouseCleaning;
-using I8Beef.Neato.Nucelo.Services.Request;
+﻿using I8Beef.Neato.Nucelo.Protocol.Services.GeneralInfo;
+using I8Beef.Neato.Nucelo.Protocol.Services.HouseCleaning;
 using System;
 using System.Threading.Tasks;
 

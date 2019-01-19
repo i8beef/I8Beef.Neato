@@ -1,12 +1,11 @@
-﻿using I8Beef.Neato.Nucelo.Protocol;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace I8Beef.Neato.Nucelo
+namespace I8Beef.Neato.Nucelo.Protocol
 {
     /// <summary>
-    /// Robot state.
+    /// State response.
     /// </summary>
-    public class RobotState
+    public class StateResponse<TData> : StandardResponse<TData>
     {
         /// <summary>
         /// State.
