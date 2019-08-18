@@ -11,25 +11,25 @@ namespace I8Beef.Neato.Nucleo.Protocol
         /// Category.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
-        public int Category { get; set; }
+        public CleaningCategory Category { get; set; }
 
         /// <summary>
         /// Mode.
         /// </summary>
         [JsonProperty(PropertyName = "mode")]
-        public int Mode { get; set; }
+        public CleaningMode Mode { get; set; }
 
         /// <summary>
         /// Modifier.
         /// </summary>
         [JsonProperty(PropertyName = "modifier")]
-        public int Modifier { get; set; }
+        public CleaningFrequency Modifier { get; set; }
 
         /// <summary>
         /// Navigation mode.
         /// </summary>
         [JsonProperty(PropertyName = "navigationMode")]
-        public int NavigationMode { get; set; }
+        public NavigationMode NavigationMode { get; set; }
 
         /// <summary>
         /// Spot width.

@@ -6,6 +6,11 @@
     public enum CleaningCategory
     {
         /// <summary>
+        /// Manual cleaning.
+        /// </summary>
+        Manual = 1,
+
+        /// <summary>
         /// House cleaning.
         /// </summary>
         HouseCleaning = 2,
