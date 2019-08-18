@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Neato.BeeHive.Protocol
 {
@@ -13,7 +13,7 @@ namespace I8Beef.Neato.BeeHive.Protocol
         /// LinkedAt.
         /// </summary>
         [JsonProperty(PropertyName = "linked_at")]
-        public DateTime LinkedAt { get; set; }
+        public DateTime? LinkedAt { get; set; }
 
         /// <summary>
         /// Model.
@@ -37,7 +37,7 @@ namespace I8Beef.Neato.BeeHive.Protocol
         /// PurchasedAt.
         /// </summary>
         [JsonProperty(PropertyName = "purchased_at")]
-        public DateTime PurchasedAt { get; set; }
+        public DateTime? PurchasedAt { get; set; }
 
         /// <summary>
         /// SecretKey.

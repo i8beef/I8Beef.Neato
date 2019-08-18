@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using I8Beef.Neato.BeeHive.Protocol;
-using I8Beef.Neato.BeeHive.Protocol.Auth;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace I8Beef.Neato.BeeHive
@@ -17,94 +17,67 @@ namespace I8Beef.Neato.BeeHive
     {
         private const string _beehiveUrl = "https://beehive.neatocloud.com";
         private const string _acceptHeader = "application/vnd.neato.beehive.v1+json";
-        private const string _tokenEndpoint = _beehiveUrl + "/oauth2/token";
 
-        private readonly ILogger<BeeHiveClient> _log;
-        private readonly string _serialNumber;
-        private readonly UserAccessToken _token;
-        private readonly HttpClient _httpClient;
+        private static readonly HttpClient _httpClient = new HttpClient { Timeout = Timeout.InfiniteTimeSpan };
 
-        private Func<CancellationToken, Task<StoredAuthToken>> _getStoredAuthTokenFunc;
-        private Func<StoredAuthToken, CancellationToken, Task> _setStoredAuthTokenFunc;
+        private readonly string _username;
+        private readonly string _password;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BeeHiveClient"/> class.
         /// </summary>
-        /// <param name="logger">Logging instance.</param>
-        /// <param name="httpClient">HttpClient.</param>
-        /// <param name="serialNumber">Serial number.</param>
-        /// <param name="secretKey">Secret key.</param>
-        /// <param name="getStoredAuthTokenFunc">Lambda function responsible for retrieving current auth token data from permanent storage.</param>
-        /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current auth token data to permanent storage.</param>
+        /// <param name="username">Username.</param>
+        /// <param name="password">Password.</param>
         public BeeHiveClient(
-            ILogger<BeeHiveClient> logger,
-            HttpClient httpClient,
-            string serialNumber,
-            Func<CancellationToken, Task<StoredAuthToken>> getStoredAuthTokenFunc,
-            Func<StoredAuthToken, CancellationToken, Task> setStoredAuthTokenFunc)
+            string username,
+            string password)
         {
-            _log = logger ?? throw new ArgumentNullException(nameof(logger));
-            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _serialNumber = serialNumber ?? throw new ArgumentNullException(nameof(serialNumber));
-
-            _getStoredAuthTokenFunc = getStoredAuthTokenFunc ?? throw new ArgumentNullException(nameof(getStoredAuthTokenFunc));
-            _setStoredAuthTokenFunc = setStoredAuthTokenFunc ?? throw new ArgumentNullException(nameof(setStoredAuthTokenFunc));
+            _username = username ?? throw new ArgumentNullException(nameof(username));
+            _password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
         /// <summary>
         /// Send GetMaps request.
         /// </summary>
+        /// <param name="serialNumber">Serial number.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="MapsInformation"/>.</returns>
-        public async Task<MapsInformation> GetMapsAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<MapsInformation> GetMapsAsync(string serialNumber, CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(new Uri(_beehiveUrl), $"users/me/robots/{_serialNumber}/maps")
+                RequestUri = new Uri(new Uri(_beehiveUrl), $"users/me/robots/{serialNumber}/maps")
             };
 
-            var response = await SendRequestAsync(requestMessage, cancellationToken);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
             {
-                _log.LogInformation("BeeHive {url} request sent", requestMessage.RequestUri);
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(await response.Content.ReadAsStringAsync());
-                _log.LogWarning("BeeHive {url} request failed", requestMessage.RequestUri);
-            }
+                response.EnsureSuccessStatusCode();
 
-            return JsonConvert.DeserializeObject<MapsInformation>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<MapsInformation>(await response.Content.ReadAsStringAsync());
+            }
         }
 
         /// <summary>
         /// Send GetPersistentMaps request.
         /// </summary>
+        /// <param name="serialNumber">Serial number.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="IList{PersistentMapInformation}"/>.</returns>
-        public async Task<IList<PersistentMapInformation>> GetPersistentMapsAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IList<PersistentMapInformation>> GetPersistentMapsAsync(string serialNumber, CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(new Uri(_beehiveUrl), $"users/me/robots/{_serialNumber}/persistent_maps")
+                RequestUri = new Uri(new Uri(_beehiveUrl), $"users/me/robots/{serialNumber}/persistent_maps")
             };
 
-            var response = await SendRequestAsync(requestMessage, cancellationToken);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
             {
-                _log.LogInformation("BeeHive {url} request sent", requestMessage.RequestUri);
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(await response.Content.ReadAsStringAsync());
-                _log.LogWarning("BeeHive {url} request failed", requestMessage.RequestUri);
-            }
+                response.EnsureSuccessStatusCode();
 
-            return JsonConvert.DeserializeObject<IList<PersistentMapInformation>>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<IList<PersistentMapInformation>>(await response.Content.ReadAsStringAsync());
+            }
         }
 
         /// <summary>
@@ -112,7 +85,7 @@ namespace I8Beef.Neato.BeeHive
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="IList{RobotInformation}"/>.</returns>
-        public async Task<IList<RobotInformation>> GetRobotsAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IList<RobotInformation>> GetRobotsAsync(CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
             {
@@ -120,19 +93,12 @@ namespace I8Beef.Neato.BeeHive
                 RequestUri = new Uri(new Uri(_beehiveUrl), "users/me/robots")
             };
 
-            var response = await SendRequestAsync(requestMessage, cancellationToken);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
             {
-                _log.LogInformation("BeeHive {url} request sent", requestMessage.RequestUri);
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(await response.Content.ReadAsStringAsync());
-                _log.LogWarning("BeeHive {url} request failed", requestMessage.RequestUri);
-            }
+                response.EnsureSuccessStatusCode();
 
-            return JsonConvert.DeserializeObject<IList<RobotInformation>>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<IList<RobotInformation>>(await response.Content.ReadAsStringAsync());
+            }
         }
 
         /// <summary>
@@ -140,7 +106,7 @@ namespace I8Beef.Neato.BeeHive
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="UserInformation"/>.</returns>
-        public async Task<UserInformation> GetUserAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<UserInformation> GetUserAsync(CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
             {
@@ -148,80 +114,70 @@ namespace I8Beef.Neato.BeeHive
                 RequestUri = new Uri(new Uri(_beehiveUrl), "users/me")
             };
 
-            var response = await SendRequestAsync(requestMessage, cancellationToken);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
             {
-                _log.LogInformation("BeeHive {url} request sent", requestMessage.RequestUri);
-            }
-            else
-            {
-                var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(await response.Content.ReadAsStringAsync());
-                _log.LogWarning("BeeHive {url} request failed", requestMessage.RequestUri);
-            }
+                response.EnsureSuccessStatusCode();
 
-            return JsonConvert.DeserializeObject<UserInformation>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<UserInformation>(await response.Content.ReadAsStringAsync());
+            }
         }
 
         /// <summary>
         /// Sends a request.
         /// </summary>
         /// <param name="requestMessage">Request message.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/>.</returns>
-        private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default(CancellationToken))
+        private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default)
         {
-            var storedAuthToken = await GetCurrentAuthTokenAsync(cancellationToken);
+            var storedAuthToken = await AuthorizeAsync(cancellationToken);
 
             // Add headers
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_acceptHeader));
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", storedAuthToken.AccessToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Token", "token=" + storedAuthToken);
 
             return await _httpClient.SendAsync(requestMessage, cancellationToken);
         }
 
         /// <summary>
-        /// Gets current auth token and handles refresh.
+        /// Authorize.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="StoredAuthToken"/>.</returns>
-        private async Task<StoredAuthToken> GetCurrentAuthTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
+        /// <returns>Access token.</returns>
+        public async Task<string> AuthorizeAsync(CancellationToken cancellationToken = default)
         {
-            var storedAuthToken = await _getStoredAuthTokenFunc(cancellationToken);
-
-            if (storedAuthToken == null)
+            using (RandomNumberGenerator csprng = new RNGCryptoServiceProvider())
             {
-                throw new NullReferenceException("Auth token storage delegate failed to provide token.");
-            }
+                byte[] rawByteArray = new byte[32];
+                csprng.GetBytes(rawByteArray);
 
-            if (DateTime.Compare(DateTime.Now, storedAuthToken.TokenExpiration) >= 0)
-            {
-                var request = new RefreshTokenRequest
+                var token = BitConverter.ToString(rawByteArray).Replace("-", string.Empty);
+
+                var content = new SessionRequest
                 {
-                    GrantType = "refresh_token",
-                    RefreshToken = storedAuthToken.RefreshToken
+                    Email = _username,
+                    Password = _password,
+                    Token = token
                 };
 
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, _tokenEndpoint);
-                requestMessage.Headers.ExpectContinue = false;
-                requestMessage.Content = new StringContent(JsonConvert.SerializeObject(request));
-
-                var response = await _httpClient.SendAsync(requestMessage, cancellationToken);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new Exception("Refresh token renewal failed.");
-
-                var authToken = JsonConvert.DeserializeObject<UserAccessToken>(responseString);
-                storedAuthToken = new StoredAuthToken
+                var requestMessage = new HttpRequestMessage
                 {
-                    AccessToken = authToken.AccessToken,
-                    RefreshToken = authToken.RefreshToken,
-                    TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri(new Uri(_beehiveUrl), "sessions"),
+                    Content = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json")
                 };
 
-                await _setStoredAuthTokenFunc(storedAuthToken, cancellationToken);
-            }
+                requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_acceptHeader));
 
-            return storedAuthToken;
+                using (var response = await _httpClient.SendAsync(requestMessage, cancellationToken))
+                {
+                    response.EnsureSuccessStatusCode();
+
+                    var responseContent = JsonConvert.DeserializeObject<SessionResponse>(await response.Content.ReadAsStringAsync());
+
+                    return responseContent.AccessToken;
+                }
+            }
         }
     }
 }

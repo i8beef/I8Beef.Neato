@@ -3,7 +3,10 @@ using Newtonsoft.Json;
 
 namespace I8Beef.Neato.BeeHive.Protocol
 {
-    class ErrorResponse
+    /// <summary>
+    /// Error reponse.
+    /// </summary>
+    public class ErrorResponse
     {
         /// <summary>
         /// Message.

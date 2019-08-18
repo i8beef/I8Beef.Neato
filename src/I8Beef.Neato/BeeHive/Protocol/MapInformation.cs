@@ -1,5 +1,5 @@
 ﻿using System;
-using I8Beef.Neato.Nucelo.Protocol;
+using I8Beef.Neato.Nucleo.Protocol;
 using Newtonsoft.Json;
 
 namespace I8Beef.Neato.BeeHive.Protocol
@@ -76,13 +76,13 @@ namespace I8Beef.Neato.BeeHive.Protocol
         public CleaningFrequency Modifier { get; set; }
 
         /// <summary>
-        /// The ISO8601 formatted GMT date & time stating when the run was started.
+        /// The ISO8601 formatted GMT date and time stating when the run was started.
         /// </summary>
         [JsonProperty(PropertyName = "start_at")]
         public DateTime StartAt { get; set; }
 
         /// <summary>
-        /// The ISO8601 formatted GMT date & time stating when the run was ended.
+        /// The ISO8601 formatted GMT date and time stating when the run was ended.
         /// </summary>
         [JsonProperty(PropertyName = "end_at")]
         public DateTime EndAt { get; set; }
