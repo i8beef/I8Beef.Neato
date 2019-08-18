@@ -13,38 +13,30 @@ using I8Beef.Neato.Nucleo.Protocol.Services.Schedule;
 
 namespace I8Beef.Neato
 {
-    /// <summary>
-    /// Robot proxy.
-    /// </summary>
-    public class Robot
+    /// <inheritdoc />
+    public class Robot : IRobot
     {
-        private readonly NucleoClient _nucleoClient;
+        private readonly INucleoClient _nucleoClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Robot"/> class.
         /// </summary>
         /// <param name="nucleoClient"><see cref="NucleoClient"/> instance.</param>
-        public Robot(NucleoClient nucleoClient)
+        public Robot(INucleoClient nucleoClient)
         {
             _nucleoClient = nucleoClient ?? throw new ArgumentNullException(nameof(nucleoClient));
         }
 
         #region Common
 
-        /// <summary>
-        /// Sends a GetRobotInfo request.
-        /// </summary>
-        /// <returns>A <see cref="RobotInfo"/>.</returns>
+        /// <inheritdoc />
         public async Task<RobotInfo> GetRobotInfoAsync()
         {
             var response = await _nucleoClient.GetRobotInfoAsync();
             return response.Data;
         }
 
-        /// <summary>
-        /// Sends a GetRobotState request.
-        /// </summary>
-        /// <returns>A <see cref="RobotState"/>.</returns>
+        /// <inheritdoc />
         public async Task<RobotState> GetRobotStateAsync()
         {
             var state = await _nucleoClient.GetRobotStateAsync();
@@ -65,10 +57,7 @@ namespace I8Beef.Neato
             return robotState;
         }
 
-        /// <summary>
-        /// Sends a dismissCurrentAlert request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public Task DismissCurrentAlertAsync()
         {
             return _nucleoClient.DismissCurrentAlertAsync();
@@ -78,10 +67,7 @@ namespace I8Beef.Neato
 
         #region FindMe
 
-        /// <summary>
-        /// Sends a FindMe request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task FindMeAsync()
         {
             var state = await GetRobotStateAsync();
@@ -102,10 +88,7 @@ namespace I8Beef.Neato
 
         #region GenergalInfo
 
-        /// <summary>
-        /// Sends a generalInfo request.
-        /// </summary>
-        /// <returns>A <see cref="GetGeneralInfo"/>.</returns>
+        /// <inheritdoc />
         public async Task<GetGeneralInfo> GetGeneralInfoAsync()
         {
             var state = await GetRobotStateAsync();
@@ -129,10 +112,7 @@ namespace I8Beef.Neato
 
         #region HouseCleaning and SpotCleaning
 
-        /// <summary>
-        /// Sends a pauseCleaning request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task PauseCleaningAsync()
         {
             var state = await GetRobotStateAsync();
@@ -159,10 +139,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a resumeCleaning request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task ResumeCleaningAsync()
         {
             var state = await GetRobotStateAsync();
@@ -189,10 +166,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a sendToBase request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task SendToBaseAsync()
         {
             var state = await GetRobotStateAsync();
@@ -219,11 +193,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a startCleaning request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task StartCleaningAsync(StartCleaningParameters parameters)
         {
             var state = await GetRobotStateAsync();
@@ -256,10 +226,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a stopCleaning request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task StopCleaningAsync()
         {
             var state = await GetRobotStateAsync();
@@ -290,10 +257,7 @@ namespace I8Beef.Neato
 
         #region LocalStats
 
-        /// <summary>
-        /// Sends a GetLocalStats request.
-        /// </summary>
-        /// <returns>A <see cref="LocalStats"/>.</returns>
+        /// <inheritdoc />
         public async Task<LocalStats> GetLocalStatsAsync()
         {
             var state = await GetRobotStateAsync();
@@ -316,10 +280,7 @@ namespace I8Beef.Neato
 
         #region ManualCleaning
 
-        /// <summary>
-        /// Sends a GetRobotManualCleaningInfo request.
-        /// </summary>
-        /// <returns>A <see cref="RobotManualCleaningInfo"/>.</returns>
+        /// <inheritdoc />
         public async Task<RobotManualCleaningInfo> GetRobotManualCleaningInfoAsync()
         {
             var state = await GetRobotStateAsync();
@@ -342,11 +303,7 @@ namespace I8Beef.Neato
 
         #region Maps
 
-        /// <summary>
-        /// Sends a GetMapBoundaries request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="MapBoundaries"/>.</returns>
+        /// <inheritdoc />
         public async Task<MapBoundaries> GetMapBoundariesAsync(GetMapBoundaries parameters)
         {
             var state = await GetRobotStateAsync();
@@ -368,11 +325,7 @@ namespace I8Beef.Neato
             return null;
         }
 
-        /// <summary>
-        /// Sends a SetMapBoundaries request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task SetMapBoundariesAsync(SetMapBoundaries parameters)
         {
             var state = await GetRobotStateAsync();
@@ -392,10 +345,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a StartPersistentMapExploration request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task StartPersistentMapExplorationAsync()
         {
             var state = await GetRobotStateAsync();
@@ -419,10 +369,7 @@ namespace I8Beef.Neato
 
         #region Preferences
 
-        /// <summary>
-        /// Sends a GetPreferences request.
-        /// </summary>
-        /// <returns>A <see cref="Preferences"/>.</returns>
+        /// <inheritdoc />
         public async Task<Preferences> GetPreferencesAsync()
         {
             var state = await GetRobotStateAsync();
@@ -442,11 +389,7 @@ namespace I8Beef.Neato
             return null;
         }
 
-        /// <summary>
-        /// Sends a SetPreferences request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="Preferences"/>.</returns>
+        /// <inheritdoc />
         public async Task SetPreferencesAsync(Preferences parameters)
         {
             var state = await GetRobotStateAsync();
@@ -469,10 +412,7 @@ namespace I8Beef.Neato
 
         #region Schedule
 
-        /// <summary>
-        /// Sends a DisableSchedule request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task DisableScheduleAsync()
         {
             var state = await GetRobotStateAsync();
@@ -492,10 +432,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a EnableSchedule request.
-        /// </summary>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task EnableScheduleAsync()
         {
             var state = await GetRobotStateAsync();
@@ -515,10 +452,7 @@ namespace I8Beef.Neato
             }
         }
 
-        /// <summary>
-        /// Sends a GetSchedule request.
-        /// </summary>
-        /// <returns>A <see cref="Schedule"/>.</returns>
+        /// <inheritdoc />
         public async Task<Schedule> GetScheduleAsync()
         {
             var state = await GetRobotStateAsync();
@@ -539,11 +473,7 @@ namespace I8Beef.Neato
             return null;
         }
 
-        /// <summary>
-        /// Sends a SetSchedule request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task SetScheduleAsync(Schedule parameters)
         {
             var state = await GetRobotStateAsync();

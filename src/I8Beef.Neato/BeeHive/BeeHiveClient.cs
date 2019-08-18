@@ -10,10 +10,8 @@ using Newtonsoft.Json;
 
 namespace I8Beef.Neato.BeeHive
 {
-    /// <summary>
-    /// BeeHive client.
-    /// </summary>
-    public class BeeHiveClient
+    /// <inheritdoc />
+    public class BeeHiveClient : IBeeHiveClient
     {
         private const string _beehiveUrl = "https://beehive.neatocloud.com";
         private const string _acceptHeader = "application/vnd.neato.beehive.v1+json";
@@ -36,12 +34,7 @@ namespace I8Beef.Neato.BeeHive
             _password = password ?? throw new ArgumentNullException(nameof(password));
         }
 
-        /// <summary>
-        /// Send GetMaps request.
-        /// </summary>
-        /// <param name="serialNumber">Serial number.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="MapsInformation"/>.</returns>
+        /// <inheritdoc />
         public async Task<MapsInformation> GetMapsAsync(string serialNumber, CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
@@ -58,12 +51,7 @@ namespace I8Beef.Neato.BeeHive
             }
         }
 
-        /// <summary>
-        /// Send GetPersistentMaps request.
-        /// </summary>
-        /// <param name="serialNumber">Serial number.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="IList{PersistentMapInformation}"/>.</returns>
+        /// <inheritdoc />
         public async Task<IList<PersistentMapInformation>> GetPersistentMapsAsync(string serialNumber, CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
@@ -80,11 +68,7 @@ namespace I8Beef.Neato.BeeHive
             }
         }
 
-        /// <summary>
-        /// Send GetRobots request.
-        /// </summary>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="IList{RobotInformation}"/>.</returns>
+        /// <inheritdoc />
         public async Task<IList<RobotInformation>> GetRobotsAsync(CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
@@ -101,11 +85,7 @@ namespace I8Beef.Neato.BeeHive
             }
         }
 
-        /// <summary>
-        /// Send GetUser request.
-        /// </summary>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="UserInformation"/>.</returns>
+        /// <inheritdoc />
         public async Task<UserInformation> GetUserAsync(CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage
@@ -139,11 +119,7 @@ namespace I8Beef.Neato.BeeHive
             return await _httpClient.SendAsync(requestMessage, cancellationToken);
         }
 
-        /// <summary>
-        /// Authorize.
-        /// </summary>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>Access token.</returns>
+        /// <inheritdoc />
         public async Task<string> AuthorizeAsync(CancellationToken cancellationToken = default)
         {
             using (RandomNumberGenerator csprng = new RNGCryptoServiceProvider())

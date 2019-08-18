@@ -17,10 +17,8 @@ using Newtonsoft.Json;
 
 namespace I8Beef.Neato.Nucleo
 {
-    /// <summary>
-    /// Nucleo client.
-    /// </summary>
-    public class NucleoClient
+    /// <inheritdoc />
+    public class NucleoClient : INucleoClient
     {
         private const string _acceptHeader = "application/vnd.neato.nucleo.v1";
         private const string _nucleoUrl = "https://nucleo.neatocloud.com";
@@ -48,167 +46,99 @@ namespace I8Beef.Neato.Nucleo
 
         #region Common
 
-        /// <summary>
-        /// Send DismissCurrentAlert request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/></returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> DismissCurrentAlertAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.DismissCurrentAlert);
 
-        /// <summary>
-        /// Send GetRobotInfo request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{RobotInfo}"/></returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<RobotInfo>> GetRobotInfoAsync() => await SendCommandAsync<StandardResponse<RobotInfo>>(CommandType.GetRobotInfo);
 
-        /// <summary>
-        /// Send GetRobotState request.
-        /// </summary>
-        /// <returns>A <see cref="StateResponse{EmptyResponse}"/></returns>
+        /// <inheritdoc />
         public async Task<StateResponse<EmptyResponse>> GetRobotStateAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.GetRobotState);
 
         #endregion
 
         #region FindMe
 
-        /// <summary>
-        /// Send FindMe request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/></returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> FindMeAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.FindMe);
 
         #endregion
 
         #region GeneralInfo
 
-        /// <summary>
-        /// Send GetGeneralInfo request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{GetGeneralInfo}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<GetGeneralInfo>> GetGeneralInfoAsync() => await SendCommandAsync<StandardResponse<GetGeneralInfo>>(CommandType.GetGeneralInfo);
 
         #endregion
 
         #region HouseCleaning and SpotCleaning
 
-        /// <summary>
-        /// Send StartCleaning request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="StateResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StateResponse<EmptyResponse>> StartCleaningAsync(StartCleaningParameters parameters) => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.StartCleaning, parameters);
 
-        /// <summary>
-        /// Send StopCleaning request.
-        /// </summary>
-        /// <returns>A <see cref="StateResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StateResponse<EmptyResponse>> StopCleaningAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.StopCleaning);
 
-        /// <summary>
-        /// Send PauseCleaning request.
-        /// </summary>
-        /// <returns>A <see cref="StateResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StateResponse<EmptyResponse>> PauseCleaningAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.PauseCleaning);
 
-        /// <summary>
-        /// Send ResumeCleaning request.
-        /// </summary>
-        /// <returns>A <see cref="StateResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StateResponse<EmptyResponse>> ResumeCleaningAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.ResumeCleaning);
 
-        /// <summary>
-        /// Send SendToBase request.
-        /// </summary>
-        /// <returns>A <see cref="StateResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StateResponse<EmptyResponse>> SendToBaseAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.SendToBase);
 
         #endregion
 
         #region LocalStats
 
-        /// <summary>
-        /// Send GetLocalStats request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{LocalStats}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<LocalStats>> GetLocalStatsAsync() => await SendCommandAsync<StandardResponse<LocalStats>>(CommandType.GetLocalStats);
 
         #endregion
 
         #region ManualCleaning
 
-        /// <summary>
-        /// Send GetRobotManualCleaningInfo request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{RobotManualCleaningInfo}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<RobotManualCleaningInfo>> GetRobotManualCleaningInfoAsync() => await SendCommandAsync<StandardResponse<RobotManualCleaningInfo>>(CommandType.GetRobotManualCleaningInfo);
 
         #endregion
 
         #region Maps
 
-        /// <summary>
-        /// Send GetMapBoundaries request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="StandardResponse{MapBoundaries}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<MapBoundaries>> GetMapBoundariesAsync(GetMapBoundaries parameters) => await SendCommandAsync<StandardResponse<MapBoundaries>>(CommandType.GetMapBoundaries, parameters);
 
-        /// <summary>
-        /// Send SetMapBoundaries request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> SetMapBoundariesAsync(SetMapBoundaries parameters) => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetMapBoundaries, parameters);
 
-        /// <summary>
-        /// Send StartPersistentMapExploration request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> StartPersistentMapExplorationAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.StartPersistentMapExploration);
 
         #endregion
 
         #region Preferences
 
-        /// <summary>
-        /// Send GetPreferences request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{Preferences}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<Preferences>> GetPreferencesAdvanced1Async() => await SendCommandAsync<StandardResponse<Preferences>>(CommandType.GetPreferences);
 
-        /// <summary>
-        /// Send SetPreferences request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> SetPreferencesAdvanced1Async(Preferences parameters) => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetPreferences, parameters);
 
         #endregion
 
         #region Schedule
 
-        /// <summary>
-        /// Send GetSchedule request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{Schedule}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<Schedule>> GetScheduleAsync() => await SendCommandAsync<StandardResponse<Schedule>>(CommandType.GetSchedule);
 
-        /// <summary>
-        /// Send SetSchedule request.
-        /// </summary>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> SetScheduleAsync(Schedule parameters) => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetSchedule, parameters);
 
-        /// <summary>
-        /// Send EnableSchedule request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{EmptyResponse}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> EnableScheduleAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.EnableSchedule);
 
-        /// <summary>
-        /// Send DisableSchedule request.
-        /// </summary>
-        /// <returns>A <see cref="StandardResponse{Schedule}"/>.</returns>
+        /// <inheritdoc />
         public async Task<StandardResponse<EmptyResponse>> DisableScheduleAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.DisableSchedule);
 
         #endregion
