@@ -5,9 +5,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Projects\I8Beef.Neato\src\I8Beef.Neato\I8Beef.Neato.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\I8Beef.Neato.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard2.0\I8Beef.Neato.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
