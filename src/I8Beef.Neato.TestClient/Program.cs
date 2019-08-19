@@ -50,7 +50,7 @@ namespace I8Beef.Neato.TestClient
             if (int.TryParse(Console.ReadLine(), out int robotId))
             {
                 var serialNumber = robots[robotId].Serial;
-                var secretKey = robots[robotId].SecretKey; ;
+                var secretKey = robots[robotId].SecretKey;
 
                 var nucleoClient = new NucleoClient(serialNumber, secretKey);
                 var robot = new Robot(nucleoClient);

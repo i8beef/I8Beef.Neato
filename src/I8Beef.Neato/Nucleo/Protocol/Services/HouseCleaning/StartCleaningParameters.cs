@@ -8,6 +8,12 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.HouseCleaning
     public class StartCleaningParameters
     {
         /// <summary>
+        /// Boundary id.
+        /// </summary>
+        [JsonProperty(PropertyName = "boundaryId")]
+        public int? BoundaryId { get; set; }
+
+        /// <summary>
         /// Category.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
@@ -35,12 +41,12 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.HouseCleaning
         /// SpotHeight.
         /// </summary>
         [JsonProperty(PropertyName = "spotHeight")]
-        public int SpotHeight { get; set; }
+        public int? SpotHeight { get; set; }
 
         /// <summary>
         /// SpotWidth.
         /// </summary>
         [JsonProperty(PropertyName = "spotWidth")]
-        public int SpotWidth { get; set; }
+        public int? SpotWidth { get; set; }
     }
 }
