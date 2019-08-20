@@ -123,19 +123,17 @@ namespace I8Beef.Neato
 
             if (state.AvailableCommands.Pause)
             {
-                throw new Exception("Robot does not support command pauseCleaning");
-            }
-
-            switch (state.AvailableServices.HouseCleaning)
-            {
-                case "basic-1":
-                case "minimal-2":
-                case "minimal-3":
-                case "basic-3":
-                case "basic-4":
-                default:
-                    await _nucleoClient.PauseCleaningAsync();
-                    break;
+                switch (state.AvailableServices.HouseCleaning)
+                {
+                    case "basic-1":
+                    case "minimal-2":
+                    case "minimal-3":
+                    case "basic-3":
+                    case "basic-4":
+                    default:
+                        await _nucleoClient.PauseCleaningAsync();
+                        break;
+                }
             }
         }
 
@@ -150,19 +148,17 @@ namespace I8Beef.Neato
 
             if (state.AvailableCommands.Resume)
             {
-                throw new Exception("Robot does not support command resumeCleaning");
-            }
-
-            switch (state.AvailableServices.HouseCleaning)
-            {
-                case "basic-1":
-                case "minimal-2":
-                case "minimal-3":
-                case "basic-3":
-                case "basic-4":
-                default:
-                    await _nucleoClient.ResumeCleaningAsync();
-                    break;
+                switch (state.AvailableServices.HouseCleaning)
+                {
+                    case "basic-1":
+                    case "minimal-2":
+                    case "minimal-3":
+                    case "basic-3":
+                    case "basic-4":
+                    default:
+                        await _nucleoClient.ResumeCleaningAsync();
+                        break;
+                }
             }
         }
 
@@ -177,19 +173,17 @@ namespace I8Beef.Neato
 
             if (state.AvailableCommands.GoToBase)
             {
-                throw new Exception("Robot does not support command sendToBase");
-            }
-
-            switch (state.AvailableServices.HouseCleaning)
-            {
-                case "basic-1":
-                case "minimal-2":
-                case "minimal-3":
-                case "basic-3":
-                case "basic-4":
-                default:
-                    await _nucleoClient.SendToBaseAsync();
-                    break;
+                switch (state.AvailableServices.HouseCleaning)
+                {
+                    case "basic-1":
+                    case "minimal-2":
+                    case "minimal-3":
+                    case "basic-3":
+                    case "basic-4":
+                    default:
+                        await _nucleoClient.SendToBaseAsync();
+                        break;
+                }
             }
         }
 
@@ -210,19 +204,17 @@ namespace I8Beef.Neato
 
             if (state.AvailableCommands.Start)
             {
-                throw new Exception("Robot does not support command startCleaning");
-            }
-
-            switch (state.AvailableServices.HouseCleaning)
-            {
-                case "basic-1":
-                case "minimal-2":
-                case "minimal-3":
-                case "basic-3":
-                case "basic-4":
-                default:
-                    await _nucleoClient.StartCleaningAsync(parameters);
-                    break;
+                switch (state.AvailableServices.HouseCleaning)
+                {
+                    case "basic-1":
+                    case "minimal-2":
+                    case "minimal-3":
+                    case "basic-3":
+                    case "basic-4":
+                    default:
+                        await _nucleoClient.StartCleaningAsync(parameters);
+                        break;
+                }
             }
         }
 
@@ -237,19 +229,17 @@ namespace I8Beef.Neato
 
             if (state.AvailableCommands.Stop)
             {
-                throw new Exception("Robot does not support command stopCleaning");
-            }
-
-            switch (state.AvailableServices.HouseCleaning)
-            {
-                case "basic-1":
-                case "minimal-2":
-                case "minimal-3":
-                case "basic-3":
-                case "basic-4":
-                default:
-                    await _nucleoClient.StopCleaningAsync();
-                    break;
+                switch (state.AvailableServices.HouseCleaning)
+                {
+                    case "basic-1":
+                    case "minimal-2":
+                    case "minimal-3":
+                    case "basic-3":
+                    case "basic-4":
+                    default:
+                        await _nucleoClient.StopCleaningAsync();
+                        break;
+                }
             }
         }
 

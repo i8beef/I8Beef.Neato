@@ -92,7 +92,10 @@ namespace I8Beef.Neato.TestClient
                         case "StartCleaning":
                             await robot.StartCleaningAsync(new StartCleaningParameters
                             {
-                                Category = CleaningCategory.SpotCleaning
+                                Category = CleaningCategory.HouseCleaning,
+                                Mode = CleaningMode.Turbo,
+                                Modifier = CleaningFrequency.Normal,
+                                NavigationMode = Nucleo.Protocol.NavigationMode.Normal
                             });
                             break;
                         case "StopCleaning":

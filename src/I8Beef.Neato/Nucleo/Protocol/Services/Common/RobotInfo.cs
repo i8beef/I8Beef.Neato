@@ -24,18 +24,18 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.Common
         /// Main board manfacturing date.
         /// </summary>
         [JsonProperty(PropertyName = "MainBrdMfgDate")]
-        public DateTime MainBrdMfgDate { get; set; }
+        public string MainBrdMfgDate { get; set; }
 
         /// <summary>
         /// Robot manfacturing date.
         /// </summary>
         [JsonProperty(PropertyName = "RobotMfgDate")]
-        public DateTime RobotMfgDate { get; set; }
+        public string RobotMfgDate { get; set; }
 
         /// <summary>
         /// Robot manfacturing date.
         /// </summary>
-        [JsonProperty(PropertyName = "RobotMfgDate")]
+        [JsonProperty(PropertyName = "BoardRev")]
         public int BoardRev { get; set; }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.Common
         /// Neato server.
         /// </summary>
         [JsonProperty(PropertyName = "NeatoServer")]
-        public int NeatoServer { get; set; }
+        public int? NeatoServer { get; set; }
 
         /// <summary>
         /// Cart ID.

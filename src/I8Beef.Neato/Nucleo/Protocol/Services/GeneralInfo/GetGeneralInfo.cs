@@ -23,7 +23,7 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.GeneralInfo
         /// <summary>
         /// The robot's interface language (if available).
         /// </summary>
-        [JsonProperty(PropertyName = "model")]
+        [JsonProperty(PropertyName = "language")]
         public string Language { get; set; }
 
         /// <summary>

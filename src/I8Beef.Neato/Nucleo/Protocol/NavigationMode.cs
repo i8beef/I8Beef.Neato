@@ -1,7 +1,7 @@
 ﻿namespace I8Beef.Neato.Nucleo.Protocol
 {
     /// <summary>
-    /// Cleaning mode.
+    /// Navigation mode.
     /// </summary>
     public enum NavigationMode
     {
@@ -13,6 +13,11 @@
         /// <summary>
         /// Extra care.
         /// </summary>
-        ExtraCare = 2
+        ExtraCare = 2,
+
+        /// <summary>
+        /// Deep.
+        /// </summary>
+        Deep = 3
     }
 }
