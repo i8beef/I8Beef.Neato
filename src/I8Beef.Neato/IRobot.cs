@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using I8Beef.Neato.Nucleo.Protocol.Services.Common;
 using I8Beef.Neato.Nucleo.Protocol.Services.GeneralInfo;
 using I8Beef.Neato.Nucleo.Protocol.Services.HouseCleaning;
@@ -18,132 +19,153 @@ namespace I8Beef.Neato
         /// <summary>
         /// Sends a DisableSchedule request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task DisableScheduleAsync();
+        Task DisableScheduleAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a DismissCurrentAlert request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task DismissCurrentAlertAsync();
+        Task DismissCurrentAlertAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a EnableSchedule request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task EnableScheduleAsync();
+        Task EnableScheduleAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a FindMe request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task FindMeAsync();
+        Task FindMeAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a generalInfo request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="GetGeneralInfo"/>.</returns>
-        Task<GetGeneralInfo> GetGeneralInfoAsync();
+        Task<GetGeneralInfo> GetGeneralInfoAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetLocalStats request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="LocalStats"/>.</returns>
-        Task<LocalStats> GetLocalStatsAsync();
+        Task<LocalStats> GetLocalStatsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetMapBoundaries request.
         /// </summary>
         /// <param name="parameters">Parameters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="MapBoundaries"/>.</returns>
-        Task<MapBoundaries> GetMapBoundariesAsync(GetMapBoundaries parameters);
+        Task<MapBoundaries> GetMapBoundariesAsync(GetMapBoundaries parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetPreferences request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Preferences"/>.</returns>
-        Task<Preferences> GetPreferencesAsync();
+        Task<Preferences> GetPreferencesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetRobotInfo request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="RobotInfo"/>.</returns>
-        Task<RobotInfo> GetRobotInfoAsync();
+        Task<RobotInfo> GetRobotInfoAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetRobotManualCleaningInfo request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="RobotManualCleaningInfo"/>.</returns>
-        Task<RobotManualCleaningInfo> GetRobotManualCleaningInfoAsync();
+        Task<RobotManualCleaningInfo> GetRobotManualCleaningInfoAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetRobotState request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="RobotState"/>.</returns>
-        Task<RobotState> GetRobotStateAsync();
+        Task<RobotState> GetRobotStateAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a GetSchedule request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Schedule"/>.</returns>
-        Task<Schedule> GetScheduleAsync();
+        Task<Schedule> GetScheduleAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a pauseCleaning request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task PauseCleaningAsync();
+        Task PauseCleaningAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a resumeCleaning request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task ResumeCleaningAsync();
+        Task ResumeCleaningAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a sendToBase request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task SendToBaseAsync();
+        Task SendToBaseAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a SetMapBoundaries request.
         /// </summary>
         /// <param name="parameters">Parameters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task SetMapBoundariesAsync(SetMapBoundaries parameters);
+        Task SetMapBoundariesAsync(SetMapBoundaries parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a SetPreferences request.
         /// </summary>
         /// <param name="parameters">Parameters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Preferences"/>.</returns>
-        Task SetPreferencesAsync(Preferences parameters);
+        Task SetPreferencesAsync(Preferences parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a SetSchedule request.
         /// </summary>
         /// <param name="parameters">Parameters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task SetScheduleAsync(Schedule parameters);
+        Task SetScheduleAsync(Schedule parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a startCleaning request.
         /// </summary>
         /// <param name="parameters">Parameters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task StartCleaningAsync(StartCleaningParameters parameters);
+        Task StartCleaningAsync(StartCleaningParameters parameters, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a StartPersistentMapExploration request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task StartPersistentMapExplorationAsync();
+        Task StartPersistentMapExplorationAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sends a stopCleaning request.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        Task StopCleaningAsync();
+        Task StopCleaningAsync(CancellationToken cancellationToken = default);
     }
 }

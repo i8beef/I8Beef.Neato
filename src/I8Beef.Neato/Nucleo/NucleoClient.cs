@@ -47,99 +47,99 @@ namespace I8Beef.Neato.Nucleo
         #region Common
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> DismissCurrentAlertAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.DismissCurrentAlert);
+        public Task<StandardResponse<EmptyResponse>> DismissCurrentAlertAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.DismissCurrentAlert, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<RobotInfo>> GetRobotInfoAsync() => await SendCommandAsync<StandardResponse<RobotInfo>>(CommandType.GetRobotInfo);
+        public Task<StandardResponse<RobotInfo>> GetRobotInfoAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<RobotInfo>>(CommandType.GetRobotInfo, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StateResponse<EmptyResponse>> GetRobotStateAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.GetRobotState);
+        public Task<StateResponse<EmptyResponse>> GetRobotStateAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.GetRobotState, null, cancellationToken);
 
         #endregion
 
         #region FindMe
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> FindMeAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.FindMe);
+        public Task<StandardResponse<EmptyResponse>> FindMeAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.FindMe, null, cancellationToken);
 
         #endregion
 
         #region GeneralInfo
 
         /// <inheritdoc />
-        public async Task<StandardResponse<GetGeneralInfo>> GetGeneralInfoAsync() => await SendCommandAsync<StandardResponse<GetGeneralInfo>>(CommandType.GetGeneralInfo);
+        public Task<StandardResponse<GetGeneralInfo>> GetGeneralInfoAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<GetGeneralInfo>>(CommandType.GetGeneralInfo, null, cancellationToken);
 
         #endregion
 
         #region HouseCleaning and SpotCleaning
 
         /// <inheritdoc />
-        public async Task<StateResponse<EmptyResponse>> StartCleaningAsync(StartCleaningParameters parameters) => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.StartCleaning, parameters);
+        public Task<StateResponse<EmptyResponse>> StartCleaningAsync(StartCleaningParameters parameters, CancellationToken cancellationToken = default) => SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.StartCleaning, parameters, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StateResponse<EmptyResponse>> StopCleaningAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.StopCleaning);
+        public Task<StateResponse<EmptyResponse>> StopCleaningAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.StopCleaning, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StateResponse<EmptyResponse>> PauseCleaningAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.PauseCleaning);
+        public Task<StateResponse<EmptyResponse>> PauseCleaningAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.PauseCleaning, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StateResponse<EmptyResponse>> ResumeCleaningAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.ResumeCleaning);
+        public Task<StateResponse<EmptyResponse>> ResumeCleaningAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.ResumeCleaning, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StateResponse<EmptyResponse>> SendToBaseAsync() => await SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.SendToBase);
+        public Task<StateResponse<EmptyResponse>> SendToBaseAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StateResponse<EmptyResponse>>(CommandType.SendToBase, null, cancellationToken);
 
         #endregion
 
         #region LocalStats
 
         /// <inheritdoc />
-        public async Task<StandardResponse<LocalStats>> GetLocalStatsAsync() => await SendCommandAsync<StandardResponse<LocalStats>>(CommandType.GetLocalStats);
+        public Task<StandardResponse<LocalStats>> GetLocalStatsAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<LocalStats>>(CommandType.GetLocalStats, null, cancellationToken);
 
         #endregion
 
         #region ManualCleaning
 
         /// <inheritdoc />
-        public async Task<StandardResponse<RobotManualCleaningInfo>> GetRobotManualCleaningInfoAsync() => await SendCommandAsync<StandardResponse<RobotManualCleaningInfo>>(CommandType.GetRobotManualCleaningInfo);
+        public Task<StandardResponse<RobotManualCleaningInfo>> GetRobotManualCleaningInfoAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<RobotManualCleaningInfo>>(CommandType.GetRobotManualCleaningInfo, null, cancellationToken);
 
         #endregion
 
         #region Maps
 
         /// <inheritdoc />
-        public async Task<StandardResponse<MapBoundaries>> GetMapBoundariesAsync(GetMapBoundaries parameters) => await SendCommandAsync<StandardResponse<MapBoundaries>>(CommandType.GetMapBoundaries, parameters);
+        public Task<StandardResponse<MapBoundaries>> GetMapBoundariesAsync(GetMapBoundaries parameters, CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<MapBoundaries>>(CommandType.GetMapBoundaries, parameters, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> SetMapBoundariesAsync(SetMapBoundaries parameters) => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetMapBoundaries, parameters);
+        public Task<StandardResponse<EmptyResponse>> SetMapBoundariesAsync(SetMapBoundaries parameters, CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetMapBoundaries, parameters, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> StartPersistentMapExplorationAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.StartPersistentMapExploration);
+        public Task<StandardResponse<EmptyResponse>> StartPersistentMapExplorationAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.StartPersistentMapExploration, null, cancellationToken);
 
         #endregion
 
         #region Preferences
 
         /// <inheritdoc />
-        public async Task<StandardResponse<Preferences>> GetPreferencesAdvanced1Async() => await SendCommandAsync<StandardResponse<Preferences>>(CommandType.GetPreferences);
+        public Task<StandardResponse<Preferences>> GetPreferencesAdvanced1Async(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<Preferences>>(CommandType.GetPreferences, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> SetPreferencesAdvanced1Async(Preferences parameters) => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetPreferences, parameters);
+        public Task<StandardResponse<EmptyResponse>> SetPreferencesAdvanced1Async(Preferences parameters, CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetPreferences, parameters, cancellationToken);
 
         #endregion
 
         #region Schedule
 
         /// <inheritdoc />
-        public async Task<StandardResponse<Schedule>> GetScheduleAsync() => await SendCommandAsync<StandardResponse<Schedule>>(CommandType.GetSchedule);
+        public Task<StandardResponse<Schedule>> GetScheduleAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<Schedule>>(CommandType.GetSchedule, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> SetScheduleAsync(Schedule parameters) => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetSchedule, parameters);
+        public Task<StandardResponse<EmptyResponse>> SetScheduleAsync(Schedule parameters, CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.SetSchedule, parameters, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> EnableScheduleAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.EnableSchedule);
+        public Task<StandardResponse<EmptyResponse>> EnableScheduleAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.EnableSchedule, null, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<StandardResponse<EmptyResponse>> DisableScheduleAsync() => await SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.DisableSchedule);
+        public Task<StandardResponse<EmptyResponse>> DisableScheduleAsync(CancellationToken cancellationToken = default) => SendCommandAsync<StandardResponse<EmptyResponse>>(CommandType.DisableSchedule, null, cancellationToken);
 
         #endregion
 
@@ -149,8 +149,9 @@ namespace I8Beef.Neato.Nucleo
         /// <typeparam name="TResponse">Type of response message.</typeparam>
         /// <param name="command">Command to send.</param>
         /// <param name="parameters">Parameters.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An awaitable <see cref="Task"/>.</returns>
-        private async Task<TResponse> SendCommandAsync<TResponse>(CommandType command, object parameters = null)
+        private async Task<TResponse> SendCommandAsync<TResponse>(CommandType command, object parameters = null, CancellationToken cancellationToken = default)
         {
             var request = new Request(_requestId, command, parameters);
 
@@ -162,14 +163,14 @@ namespace I8Beef.Neato.Nucleo
                 Content = new StringContent(serializedContent, Encoding.UTF8, "application/json")
             };
 
-            using (var response = await SendRequestAsync(requestMessage))
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken).ConfigureAwait(false))
             {
                 // Bump request id
                 _requestId++;
 
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
 
@@ -177,11 +178,12 @@ namespace I8Beef.Neato.Nucleo
         /// Sends a request.
         /// </summary>
         /// <param name="requestMessage">Request message.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>An <see cref="HttpResponseMessage"/>.</returns>
-        private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage requestMessage)
+        private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default)
         {
             var dateHeaderValue = DateTime.UtcNow.ToString("ddd, dd MMM yyy HH:mm:ss 'GMT'");
-            var body = await requestMessage.Content.ReadAsStringAsync();
+            var body = await requestMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             byte[] secretkey = Encoding.UTF8.GetBytes(_secretKey);
             using (HMACSHA256 hmac = new HMACSHA256(secretkey))
@@ -195,7 +197,8 @@ namespace I8Beef.Neato.Nucleo
                 requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("NEATOAPP", BitConverter.ToString(signature).Replace("-", string.Empty).ToLower());
                 requestMessage.Headers.Add("X-Date", dateHeaderValue);
 
-                return await _httpClient.SendAsync(requestMessage);
+                return await _httpClient.SendAsync(requestMessage, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -43,11 +43,11 @@ namespace I8Beef.Neato.BeeHive
                 RequestUri = new Uri(new Uri(_beehiveUrl), $"users/me/robots/{serialNumber}/maps")
             };
 
-            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<MapsInformation>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<MapsInformation>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
 
@@ -60,11 +60,11 @@ namespace I8Beef.Neato.BeeHive
                 RequestUri = new Uri(new Uri(_beehiveUrl), $"users/me/robots/{serialNumber}/persistent_maps")
             };
 
-            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<IList<PersistentMapInformation>>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<IList<PersistentMapInformation>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
 
@@ -77,11 +77,11 @@ namespace I8Beef.Neato.BeeHive
                 RequestUri = new Uri(new Uri(_beehiveUrl), "users/me/robots")
             };
 
-            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<IList<RobotInformation>>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<IList<RobotInformation>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
 
@@ -94,11 +94,11 @@ namespace I8Beef.Neato.BeeHive
                 RequestUri = new Uri(new Uri(_beehiveUrl), "users/me")
             };
 
-            using (var response = await SendRequestAsync(requestMessage, cancellationToken))
+            using (var response = await SendRequestAsync(requestMessage, cancellationToken).ConfigureAwait(false))
             {
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<UserInformation>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<UserInformation>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
         }
 
@@ -110,13 +110,13 @@ namespace I8Beef.Neato.BeeHive
         /// <returns>An <see cref="HttpResponseMessage"/>.</returns>
         private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default)
         {
-            var storedAuthToken = await AuthorizeAsync(cancellationToken);
+            var storedAuthToken = await AuthorizeAsync(cancellationToken).ConfigureAwait(false);
 
             // Add headers
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_acceptHeader));
             requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Token", "token=" + storedAuthToken);
 
-            return await _httpClient.SendAsync(requestMessage, cancellationToken);
+            return await _httpClient.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -145,11 +145,11 @@ namespace I8Beef.Neato.BeeHive
 
                 requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_acceptHeader));
 
-                using (var response = await _httpClient.SendAsync(requestMessage, cancellationToken))
+                using (var response = await _httpClient.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false))
                 {
                     response.EnsureSuccessStatusCode();
 
-                    var responseContent = JsonConvert.DeserializeObject<SessionResponse>(await response.Content.ReadAsStringAsync());
+                    var responseContent = JsonConvert.DeserializeObject<SessionResponse>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
 
                     return responseContent.AccessToken;
                 }

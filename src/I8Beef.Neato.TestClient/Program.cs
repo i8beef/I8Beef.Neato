@@ -1,22 +1,17 @@
-﻿using I8Beef.Neato.BeeHive;
+﻿using System;
+using System.Threading.Tasks;
+using I8Beef.Neato.BeeHive;
 using I8Beef.Neato.Nucleo;
 using I8Beef.Neato.Nucleo.Protocol;
 using I8Beef.Neato.Nucleo.Protocol.Services.HouseCleaning;
 using I8Beef.Neato.Nucleo.Protocol.Services.Maps;
 using Newtonsoft.Json;
-using System;
-using System.Threading.Tasks;
 
 namespace I8Beef.Neato.TestClient
 {
     public class Program
     {
-        public static void Main(string[] args)
-        {
-            MainAsync(args).GetAwaiter().GetResult();
-        }
-
-        public static async Task MainAsync(string[] args)
+        public static async Task Main(string[] args)
         {
             var email = "";
             var password = "";
