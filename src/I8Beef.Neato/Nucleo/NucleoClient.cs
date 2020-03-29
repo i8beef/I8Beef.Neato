@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -182,7 +183,7 @@ namespace I8Beef.Neato.Nucleo
         /// <returns>An <see cref="HttpResponseMessage"/>.</returns>
         private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default)
         {
-            var dateHeaderValue = DateTime.UtcNow.ToString("ddd, dd MMM yyy HH:mm:ss 'GMT'");
+            var dateHeaderValue = DateTime.UtcNow.ToString("ddd, dd MMM yyy HH:mm:ss 'GMT'", new CultureInfo("en-US"));
             var body = await requestMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             byte[] secretkey = Encoding.UTF8.GetBytes(_secretKey);
