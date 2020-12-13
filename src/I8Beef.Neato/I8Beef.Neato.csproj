@@ -8,6 +8,7 @@
     <Copyright>Copyright ©  2019</Copyright>
     <PackageProjectUrl>https://github.com/i8beef/I8Beef.Neato</PackageProjectUrl>
     <PackageTags>Neato Botvac</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
