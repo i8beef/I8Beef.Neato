@@ -12,5 +12,11 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.Maps
         /// </summary>
         [EnumMember(Value = "polyline")]
         Polyline,
+
+        /// <summary>
+        /// A n-polygon that defines a go-zone area (such as the kitchen).
+        /// </summary>
+        [EnumMember(Value = "polygon")]
+        Polygon
     }
 }
