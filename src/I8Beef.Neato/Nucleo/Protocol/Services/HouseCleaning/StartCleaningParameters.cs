@@ -11,7 +11,7 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.HouseCleaning
         /// Boundary id.
         /// </summary>
         [JsonProperty(PropertyName = "boundaryId")]
-        public int? BoundaryId { get; set; }
+        public string BoundaryId { get; set; }
 
         /// <summary>
         /// Category.
