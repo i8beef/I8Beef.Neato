@@ -44,5 +44,12 @@ namespace I8Beef.Neato.Nucleo.Protocol.Services.Maps
         /// </summary>
         [JsonProperty(PropertyName = "vertices")]
         public IList<IList<decimal>> Vertices { get; set; }
+
+        /// <summary>
+        /// This element MUST be present only if type is polygon. It gives the coordinates of a point inside the polygon with format [x,y] where x is the horizontal axis and y the vertical axis expressed as the fraction of respectively the width and the height of the map.
+        /// A polygon may intersect walls, and hence cover areas of different and eventually non-adjacent rooms. Relevancy is the point that defines the area of interest as the set of all floor points that are contiguous to this point and are contained in the polygon.
+        /// </summary>
+        [JsonProperty(PropertyName = "relevancy")]
+        public IList<decimal> Relevancy { get; set; }
     }
 }
