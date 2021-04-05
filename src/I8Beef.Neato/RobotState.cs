@@ -24,7 +24,7 @@ namespace I8Beef.Neato
         /// Error.
         /// </summary>
         [JsonProperty(PropertyName = "error")]
-        public int? Error { get; set; }
+        public string Error { get; set; }
 
         /// <summary>
         /// Alert.
