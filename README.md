@@ -1,7 +1,8 @@
 # I8Beef.Neato
 
-[![Build status](https://ci.appveyor.com/api/projects/status/yfcru9o7v00ukxax/branch/release?svg=true)](https://ci.appveyor.com/project/i8beef/i8beef-neato/branch/release)
-[![Build status](https://ci.appveyor.com/api/projects/status/yfcru9o7v00ukxax/branch/master?svg=true)](https://ci.appveyor.com/project/i8beef/i8beef-neato/branch/master)
+![Build](https://github.com/i8beef/I8Beef.Neato/actions/workflows/build.yml/badge.svg?branch=master)
+![Release](https://github.com/i8beef/I8Beef.Neato/actions/workflows/release.yml/badge.svg)
+
 .NET library for interacting with the Neato Botvac API
 
 ### Where to get it
